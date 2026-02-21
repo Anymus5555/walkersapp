@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+      // Fix for "Uncaught TypeError: Cannot set property fetch of #<Window> which has only a getter"
+      // This happens when external scripts (like ads or analytics) try to polyfill/wrap fetch
+      // in an environment where it's read-only.
+      (function() {
+        try {
+          const descriptor = Object.getOwnPropertyDescriptor(window, 'fetch');
+          if (descriptor && !descriptor.writable && !descriptor.set) {
+            // It's a getter-only property. We can't fix it by assignment, 
+            // but we can try to define a dummy setter to prevent the crash.
+            Object.defineProperty(window, 'fetch', {
+              get: function() { return descriptor.get.call(window); },
+              set: function() { /* ignore assignment */ },
+              configurable: true
+            });
+          }
+        } catch (e) {
+          console.warn('Fetch protection script failed:', e);
+        }
+      })();
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8924293093278301" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RLDJJNGDL6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RLDJJNGDL6');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walkers Madrid Official Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js"></script>
+    <script src="https://playerjs.com/html/playerjs.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gold: #bf953f;
+            --primary-gold-rgb: 191, 149, 63;
+            --secondary-gold: #fcf6ba;
+            --accent-gold: #aa771c;
+            --bg-overlay: rgba(0, 0, 0, 0.4);
+            --ui-opacity: 0.4;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050505;
+            color: white;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        
+        /* Fullscreen Fixes */
+        :fullscreen {
+            width: 100vw !important;
+            height: 100vh !important;
+            background: black !important;
+        }
+        :-webkit-full-screen {
+            width: 100vw !important;
+            height: 100vh !important;
+            background: black !important;
+        }
+        :-moz-full-screen {
+            width: 100vw !important;
+            height: 100vh !important;
+            background: black !important;
+        }
+        :-ms-fullscreen {
+            width: 100vw !important;
+            height: 100vh !important;
+            background: black !important;
+        }
+
+        .stadium-bg {
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            transition: background-image 0.7s ease-in-out;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold), var(--accent-gold), var(--secondary-gold), var(--accent-gold));
+        }
+        .gold-text-gradient {
+            background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fcf6ba, #bf953f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .black-gold-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(40px); filter: blur(10px); }
+            to { opacity: 1; transform: translateX(0); filter: blur(0); }
+        }
+        .animate-slideIn {
+            animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .animate-slideInLeft {
+            animation: slideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideOutLeft {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(-50px); }
+        }
+        .animate-slideOutLeft {
+            animation: slideOutLeft 0.5s ease-in forwards;
+        }
+
+        @keyframes slideInSpring {
+            0% { transform: translateX(-100%) scale(0.9); opacity: 0; }
+            70% { transform: translateX(5%) scale(1.02); opacity: 1; }
+            100% { transform: translateX(0) scale(1); opacity: 1; }
+        }
+        .animate-slideInSpring {
+            animation: slideInSpring 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes toastProgress {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+        .animate-toastProgress {
+            animation: toastProgress linear forwards;
+        }
+
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); }
+        .custom-scroll::-webkit-scrollbar-thumb { background: var(--primary-gold); border-radius: 10px; }
+    </style>
+
+<link rel="stylesheet" href="/index.css">
+<script type="importmap">
+{
+  "imports": {
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "firebase/": "https://esm.sh/firebase@^12.9.0/"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-BK6aVjJA.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>
