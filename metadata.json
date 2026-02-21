@@ -1,0 +1,7 @@
+{
+  "name": "Walkers Madrid Official Page",
+  "description": "A minimalist, high-end online TV streaming platform featuring language selection and a focused viewing experience with a sleek golden-black aesthetic.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
